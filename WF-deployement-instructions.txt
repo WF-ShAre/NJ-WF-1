@@ -1,6 +1,7 @@
-This folder includes all files and scripts to deploy Nieghbour Joining workflow on Multiple Docker containers. Please follow the following:
+This repository includes all files and scripts to deploy Nieghbour Joining workflow on Multiple Docker containers as follow:
 
-1- Create ~/input folder and put your input files in.
+1- If you have your own input files, open Input.yaml file and fill the inputs, else inside workflow folder
+ run the . ./wf-install 1
 
 2- download wf-install.sh from NJ-WF using the url and run it:
   - Inside a terminal, type:
