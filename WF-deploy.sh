@@ -9,13 +9,13 @@ if [[ ${wf} == 1 ]]; then
       echo "previous workflow execution exists and will be deleted"
       rm -r ~/realeScWF-inhost
    fi
-  cfy local init --blueprint-path -p NJ-blueprint/realeScWF-inhost.yaml --input input.yaml
+  cfy local init --install-plugins -p realeScWF-inhost.yaml --input input.yaml
 else
    if [[ -d ~/realeScWF-1host ]]; then
       echo "previous workflow execution exists and will be deleted"
       rm -r ~/realeScWF-1host
    fi
-  cfy local init --install-plugins -p NJ-blueprint/realeScWF-1host.yaml -input input.yaml
+  cfy local init --install-plugins -p realeScWF-1host.yaml -i input.yaml
 fi
 
 

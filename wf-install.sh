@@ -24,6 +24,7 @@ fi
 
 if [[ ! -d ~/WF-Cloudify ]]; then
    echo "Cloudify installation"
+   mkdir temp-install
    wget -O temp-install/cloudify-install.sh https://github.com/WorkflowCenter-Repositories/ToolsInstallationScripts/raw/master/cloudify-install.sh
    chmod u+x ~temp-install/cloudify-install.sh
    . ./temp-install/cloudify-install.sh
@@ -38,8 +39,8 @@ echo "workflow deployment"
 chmod u+x WF-deploy.sh
 if [[ ${WF} == 1 ]]; then
    echo "NJ deployment with Multiple Containers"
-   .WF-deploy.sh 1
+   ./WF-deploy.sh 1
 else
    echo "NJ deployment with Single Container"
-   .WF-deploy.sh 2
+   ./WF-deploy.sh 2
 fi
