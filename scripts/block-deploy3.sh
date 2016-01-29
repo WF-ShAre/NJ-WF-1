@@ -13,15 +13,13 @@ set -e
 
 ctx logger info "Deploying ${block} on ${CONTAINER_ID}"
 
-
-
-  if [[ -n "${Yum}" ]]; then
+if [[ -n "${Yum}" ]]; then
 	Wget=$(sudo docker exec -it ${CONTAINER_ID} rpm -qa wget)
 	if [[ -z ${Wget} ]]; then
 	   sudo docker exec -it ${CONTAINER_ID} yum update
 	   sudo docker exec -it ${CONTAINER_ID} yum -y install wget
         fi
-  else
+else
         set +e
 	  Wget=$(sudo docker exec -it ${CONTAINER_ID} which wget)
         set -e
@@ -39,5 +37,5 @@ sudo docker exec -it ${CONTAINER_ID} [ ! -f tasks/${BLOCK_NAME} ] && sudo docker
 
 ctx logger info "Execute the block"
 sudo docker exec -it ${CONTAINER_ID} java -jar tasks/${BLOCK_NAME} ${blueprint} ${block}
-sudo docker ps -s >> ~/docker.csv
+
 
