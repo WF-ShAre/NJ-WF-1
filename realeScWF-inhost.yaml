@@ -11,7 +11,7 @@ inputs:
   input-dir:
       description: >
         The dir path of the input files  
-      default: '~/input'
+      default: 'Input-sample'
 
   input-file1:
       description: >
