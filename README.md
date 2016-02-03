@@ -47,13 +47,13 @@
 #Deployment Instruction
 This repository includes all files and scripts to deploy Nieghbour Joining workflow on Multiple Docker containers as follow:
 
-1- If you have your own input files, open Input.yaml file and fill the inputs, else inside workflow folder
- run the . ./wf-install 1
+1- Clone the repository to your machine, open a terminal window and change to workflow repository.
+2- To execute the workflow with multi containers and the attached input sample, in the terminal run: 
+   . ./NJ-deploy.sh 1  
+3- If you have own input files, copy your files to NJ/WF/Input-sample folder, open Input.yaml file and change input files name, then
+   run: . ./NJ-deploy.sh 1
 
-2- download wf-install.sh from NJ-WF using the url and run it:
-  - Inside a terminal, type:
-    wget https://github.com/rawaqasha/Workflows-Repository/raw/master/NJ-WF/NJ-package/wf-install.sh
- 
-  - . ./wf-install.sh
+4- To execute the workflow with single container, follow either step 2 or 3 but run:  
+   . ./NJ-deploy 2
   
-2- After successfully running the workflow, five output files can be found in ~/realeScWF-inhots folder
+After successfully running the workflow, five output files can be found in ~/realeScWF-inhots folder
