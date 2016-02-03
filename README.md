@@ -2,7 +2,6 @@
 
 ![myimage-alt-tag](https://github.com/WorkflowCenter-Repositories/NJ-WF/raw/master/WF%20structure.png)
 
-#Workflow information:
 
   WF-Title: Neighbour Joining
   version: 1.0
