@@ -2,7 +2,6 @@
 
 ![myimage-alt-tag](https://github.com/WorkflowCenter-Repositories/NJ-WF/raw/master/WF%20structure.png)
 
-General:
 
   WF-Title: Neighbour Joining
   version: 1.0
@@ -10,13 +9,13 @@ General:
   instruction-file: NJ-instruction
   WF-Diagram: JN-png
 
-WF-Tasks:
+###WF-Tasks:
 
   No-of-tasks: 11
   Tasks: {importFile: 2, filejoin: 1, filterDuplicate: 1, clustalw: 1, Mega-NJ: 1, exportFile: 3, csvExport: 2}
   Dependency-Libs: {java1.7: all, clustalw-lib: clustalw, wine1.6: Mega-NJ, Mega-CC: Mega-NJ} 
 
-Blueprint:
+###Blueprint:
 
   blueprint-name: realeScWF-inhost.yaml
   Docker-images: rawa/nj 
@@ -24,20 +23,20 @@ Blueprint:
   OS-types: ubuntu14.4
   tools: 
 
-Input:
+###Input:
 
   input-file(s): {'file1', 'file2'}
   description: Two files for the two importfile tasks
   types: 
 
-Outputs:
+###Outputs:
 
   output-folder: '~/blueprint-name'
   output-file(s): {'analysis-output', 'consensus-output', 'summary-info', 'removed-sequences', 'sequence-map'}
   description:
   types: {' ', ' ', ' ', csv-file, csv-file}
 
-Execution-Environment:
+###Execution-Environment:
 
   Cloudify-version: 3.2
   Docker-version: 1.8+
