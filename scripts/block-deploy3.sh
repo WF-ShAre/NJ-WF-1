@@ -6,6 +6,7 @@ block=$(ctx node name)
 CONTAINER_ID=$2
 BLOCK_NAME=$(ctx node properties block_name)
 BLOCK_URL=$3
+input=$4
 
 set +e
  Yum=$(sudo docker exec -it ${CONTAINER_ID} which yum)
@@ -36,6 +37,6 @@ sudo docker exec -it ${CONTAINER_ID} [ ! -f tasks/${BLOCK_NAME} ] && sudo docker
 
 
 ctx logger info "Execute the block"
-sudo docker exec -it ${CONTAINER_ID} java -jar tasks/${BLOCK_NAME} ${blueprint} ${block}
+sudo docker exec -it ${CONTAINER_ID} java -jar tasks/${BLOCK_NAME} ${blueprint} ${block} ${input}
 
 
