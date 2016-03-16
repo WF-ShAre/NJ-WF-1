@@ -50,7 +50,7 @@ This repository includes all files and scripts to deploy Nieghbour Joining workf
 1- Clone the repository to your machine, open a terminal window and change to workflow repository.  
 2- To execute the workflow with multi containers and the attached input sample, in the terminal run:   
    . ./NJ-deploy.sh 1    
-3- If you have own input files, copy your files to NJ/WF/Input-sample folder, open Input.yaml file and change input files name, then
+3- If you have own input files, copy your files to NJ/Input-sample folder, open Input.yaml file and change input files name, then
    run:  
    . ./NJ-deploy.sh 1  
   
