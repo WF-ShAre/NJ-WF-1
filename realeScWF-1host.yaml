@@ -487,6 +487,11 @@ node_templates:
     type: cloudify.nodes.ApplicationModule
     interfaces:
       cloudify.interfaces.lifecycle:
+        create:
+          implementation: scripts/image_create.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1]
         configure:
           implementation: scripts/containers-clean.sh
           inputs:
