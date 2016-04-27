@@ -491,7 +491,7 @@ node_templates:
           implementation: scripts/image_create.sh
           inputs:
             process:
-             args: [realeScWF-1host, container1]
+             args: [nj, container1]
         configure:
           implementation: scripts/containers-clean.sh
           inputs:
