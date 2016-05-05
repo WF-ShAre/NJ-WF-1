@@ -496,7 +496,7 @@ node_templates:
           implementation: scripts/containers-clean.sh
           inputs:
             process:
-              args: [container1]
+              args: []
         start:
           implementation: scripts/final-inhost.sh
           inputs:
