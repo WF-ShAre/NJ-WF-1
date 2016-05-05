@@ -1,1 +1,0 @@
-{"relationships": [{"target_name": "container6", "type": "cloudify.relationships.contained_in", "target_id": "container6_2cb00"}, {"target_name": "Wine", "type": "cloudify.relationships.depends_on", "target_id": "Wine_1c7c8"}], "state": "initializing", "node_id": "Mega-CC", "name": "Mega-CC", "version": 1, "host_id": "host_bdc59", "runtime_properties": {}, "id": "Mega-CC_5dd6d"}

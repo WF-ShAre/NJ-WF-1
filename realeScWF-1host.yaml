@@ -26,7 +26,8 @@ inputs:
   docker-image: 
       description: > 
         Docker image to be used for container building
-      default: 'ubuntu:14.04'
+      default: 'dtdwd/nj1'
+
 
 node_types:
 
