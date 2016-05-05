@@ -51,7 +51,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
-          implementation: scripts/start-inhost.sh
+          implementation: Core-LifecycleScripts/start-inhost.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -67,7 +67,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -108,7 +108,7 @@ node_templates:
             process:
              args: [realeScWF-inhost, container1, { get_input: input-dir }, { get_input: input-file1 }] 
         start: 
-          implementation: scripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/block-deploy3.sh
           inputs:
             process:
              args: [realeScWF-inhost, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/importfile1.jar', { get_input: input-file1 }]
@@ -125,7 +125,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:        
         start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -166,7 +166,7 @@ node_templates:
             process:
              args: [realeScWF-inhost, container2, { get_input: input-dir }, { get_input: input-file2 }]
         start: 
-          implementation: scripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/block-deploy3.sh
           inputs:
             process:
              args: [realeScWF-inhost, container2, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/importfile1.jar', { get_input: input-file2 }]
@@ -183,7 +183,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -225,7 +225,7 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [importFile1/output-1, FileJoin/file-1, realeScWF-inhost, container3]
@@ -234,7 +234,7 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [importFile2/output-1, FileJoin/file-2, realeScWF-inhost, container3]
@@ -243,12 +243,12 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         configure:
-          implementation: scripts/containers-clean.sh
+          implementation: Core-LifecycleScripts/containers-clean.sh
           inputs:
             process:
              args: [container1, container2]
         start:
-          implementation: scripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/block-deploy3.sh
           inputs:
             process:
              args: [realeScWF-inhost, container3, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/filejoin1.jar']
@@ -260,7 +260,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -302,19 +302,19 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [FileJoin/file-3, FilterDupl/fasta-files, realeScWF-inhost, container4]
     interfaces:
       cloudify.interfaces.lifecycle:
         configure:
-          implementation: scripts/containers-clean.sh
+          implementation: Core-LifecycleScripts/containers-clean.sh
           inputs:
             process:
              args: [container3]
         start:
-          implementation: scripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/block-deploy3.sh
           inputs:
             process:
               args: [realeScWF-inhost, container4, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/filterduplicates1.jar']
@@ -326,7 +326,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -388,14 +388,14 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [FilterDupl/filtered-fasta-files, ClustalW/input-sequences, realeScWF-inhost, container5]        
     interfaces:
       cloudify.interfaces.lifecycle:
         configure:
-          implementation: scripts/containers-clean.sh
+          implementation: Core-LifecycleScripts/containers-clean.sh
           inputs:
             process:
              args: [container4]
@@ -413,7 +413,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -499,14 +499,14 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [ClustalW/aligned-sequences, Mega-NJ/input-data, realeScWF-inhost, container6]        
     interfaces:
       cloudify.interfaces.lifecycle:
         configure:
-          implementation: scripts/containers-clean.sh
+          implementation: Core-LifecycleScripts/containers-clean.sh
           inputs:
             process:
              args: [container5]
@@ -523,7 +523,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -563,7 +563,7 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [Mega-NJ/analysis-output, ExportFiles1/file-list, realeScWF-inhost, container7]
@@ -572,12 +572,12 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         configure:
-          implementation: scripts/containers-clean.sh
+          implementation: Core-LifecycleScripts/containers-clean.sh
           inputs:
             process:
              args: [container6]
         start: 
-          implementation: scripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/block-deploy3.sh
           inputs:
             process:
              args: [realeScWF-inhost, container7, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/exportfiles1.jar']
@@ -589,7 +589,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -629,7 +629,7 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [Mega-NJ/consensus-output, ExportFiles2/file-list, realeScWF-inhost, container8]
@@ -638,7 +638,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start: 
-          implementation: scripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/block-deploy3.sh
           inputs:
             process:
              args: [realeScWF-inhost, container8, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/exportfiles1.jar']
@@ -650,7 +650,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -690,7 +690,7 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [Mega-NJ/summary-info, ExportFiles3/file-list, realeScWF-inhost, container9]
@@ -699,7 +699,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start: 
-          implementation: scripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/block-deploy3.sh
           inputs:
             process:
              args: [realeScWF-inhost, container9, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/exportfiles1.jar']
@@ -711,7 +711,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
          start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -752,7 +752,7 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [FilterDupl/sequence-map, CSV_export1/input-data, realeScWF-inhost, container10]
@@ -761,7 +761,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start: 
-          implementation: scripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/block-deploy3.sh
           inputs:
             process:
              args: [realeScWF-inhost, container10, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/csvexport1.jar']
@@ -773,7 +773,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
-          implementation: scripts/container.sh
+          implementation: Core-LifecycleScripts/container.sh
           inputs:
             process:
               args: [realeScWF-inhost]
@@ -814,7 +814,7 @@ node_templates:
         source_interfaces:
           cloudify.interfaces.relationship_lifecycle:
             preconfigure:
-              implementation: scripts/datacopy.sh
+              implementation: Core-LifecycleScripts/datacopy.sh
               inputs:
                 process:
                   args: [FilterDupl/sequence-map, CSV_export2/input-data, realeScWF-inhost, container11]
@@ -823,7 +823,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         start: 
-          implementation: scripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/block-deploy3.sh
           inputs:
             process:
              args: [realeScWF-inhost, container11, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/csvexport1.jar']
@@ -833,12 +833,12 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         configure:
-          implementation: scripts/containers-clean.sh
+          implementation: Core-LifecycleScripts/containers-clean.sh
           inputs:
             process:
               args: [container7, container8, container9, container10, container11]
         start:
-          implementation: scripts/final-inhost.sh
+          implementation: Core-LifecycleScripts/final-inhost.sh
           inputs:
             process:
               args: [realeScWF-inhost]
