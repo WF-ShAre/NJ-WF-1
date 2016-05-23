@@ -28,6 +28,11 @@ inputs:
         Docker image to be used for container building
       default: 'dtdwd/nj1'
 
+  create_image:
+      description: > 
+        an option to create Docker images
+      default: 'False'
+
 
 node_types:
 
@@ -104,16 +109,21 @@ node_templates:
       Source: file1.txt
     interfaces:
       cloudify.interfaces.lifecycle:
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/importfile1.jar']
         configure:
           implementation: scripts/get-input.sh
           inputs:
             process:
              args: [realeScWF-1host, container1, { get_input: input-dir }, { get_input: input-file1 }]
         start: 
-          implementation: Core-LifecycleScripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
             process:
-             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/importfile1.jar', { get_input: input-file1 }]
+             args: [realeScWF-1host, container1, { get_input: input-file1 }]
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -130,16 +140,21 @@ node_templates:
       Source: file2.txt
     interfaces:
       cloudify.interfaces.lifecycle:
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/importfile1.jar']
         configure:
           implementation: scripts/get-input.sh
           inputs:
             process:
              args: [realeScWF-1host, container1, { get_input: input-dir }, { get_input: input-file2 }]
         start: 
-          implementation: Core-LifecycleScripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
             process:
-             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/importfile1.jar', { get_input: input-file2 }]
+             args: [realeScWF-1host, container1, { get_input: input-file2 }]
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -179,12 +194,17 @@ node_templates:
       - type: cloudify.relationships.depends_on
         target: Java
     interfaces:
-      cloudify.interfaces.lifecycle:       
-        start:
-          implementation: Core-LifecycleScripts/block-deploy3.sh
+      cloudify.interfaces.lifecycle: 
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/filejoin1.jar']
+             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/filejoin1.jar']     
+        start:
+          implementation: Core-LifecycleScripts/task-deploy.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1]
 
   FilterDupl:
     type: filterDupl
@@ -209,11 +229,16 @@ node_templates:
                   args: [FileJoin/file-3, FilterDupl/fasta-files, realeScWF-1host, container1]
     interfaces:
       cloudify.interfaces.lifecycle:
-        start:
-          implementation: Core-LifecycleScripts/block-deploy3.sh
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-              args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/filterduplicates1.jar']
+             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/filterduplicates1.jar']
+        start:
+          implementation: Core-LifecycleScripts/task-deploy.sh
+          inputs:
+            process:
+              args: [realeScWF-1host, container1]
 
   ClustalW_Lib:
     type: clustalw_lib
@@ -258,11 +283,16 @@ node_templates:
                   args: [FilterDupl/filtered-fasta-files, ClustalW/input-sequences, realeScWF-1host, container1]        
     interfaces:
       cloudify.interfaces.lifecycle:
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/clustalw1.jar']
         start:
           implementation: scripts/special-deploy.sh
           inputs:
             process:
-              args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/clustalw1.jar',  get_property: [ClustalW_Lib, lib_name]]
+              args: [realeScWF-1host, container1,  get_property: [ClustalW_Lib, lib_name]]
 
   Wine:
     type: spec_library
@@ -331,11 +361,16 @@ node_templates:
                   args: [ClustalW/aligned-sequences, Mega-NJ/input-data, realeScWF-1host, container1]        
     interfaces:
       cloudify.interfaces.lifecycle:
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/mega-nj1.jar']
         start:
           implementation: scripts/special-deploy.sh
           inputs:
             process:
-              args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/mega-nj1.jar',  get_property: [Mega-CC, lib_path]]
+              args: [realeScWF-1host, container1,  get_property: [Mega-CC, lib_path]]
 
   ExportFiles1:
     type: exportfiles
@@ -360,11 +395,16 @@ node_templates:
         target: Java
     interfaces:
       cloudify.interfaces.lifecycle:
-        start: 
-          implementation: Core-LifecycleScripts/block-deploy3.sh
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
              args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/exportfiles1.jar']
+        start: 
+          implementation: Core-LifecycleScripts/task-deploy.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1]
 
   ExportFiles2:
     type: exportfiles
@@ -389,11 +429,16 @@ node_templates:
         target: Java
     interfaces:
       cloudify.interfaces.lifecycle:
-        start: 
-          implementation: Core-LifecycleScripts/block-deploy3.sh
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
              args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/exportfiles1.jar']
+        start: 
+          implementation: Core-LifecycleScripts/task-deploy.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1]
 
   ExportFiles3:
     type: exportfiles
@@ -418,11 +463,16 @@ node_templates:
         target: Java
     interfaces:
       cloudify.interfaces.lifecycle:
-        start: 
-          implementation: Core-LifecycleScripts/block-deploy3.sh
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
              args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/exportfiles1.jar']
+        start: 
+          implementation: Core-LifecycleScripts/task-deploy.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1]
 
   CSV_export1:
     type: csvexport
@@ -448,8 +498,13 @@ node_templates:
         target: Java
     interfaces:
       cloudify.interfaces.lifecycle:
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/csvexport1.jar']
         start: 
-          implementation: Core-LifecycleScripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
             process:
              args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/csvexport1.jar']
@@ -478,8 +533,13 @@ node_templates:
         target: Java
     interfaces:
       cloudify.interfaces.lifecycle:
+        create: 
+          implementation: Core-LifecycleScripts/task-download-single.sh
+          inputs:
+            process:
+             args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/csvexport1.jar']
         start: 
-          implementation: Core-LifecycleScripts/block-deploy3.sh
+          implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
             process:
              args: [realeScWF-1host, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/csvexport1.jar']
@@ -489,10 +549,10 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
-          implementation: scripts/image_create.sh
+          implementation: Core-LifecycleScripts/image_create.sh
           inputs:
             process:
-             args: [nj-new, container1]
+             args: [nj-new, container1, { get_input: create_image}]
         configure:
           implementation: Core-LifecycleScripts/containers-clean.sh
           inputs:
