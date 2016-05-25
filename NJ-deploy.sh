@@ -21,17 +21,17 @@ sudo service docker start
 
 echo "deploy the workflow"
 if [[ ${wf} == 1 ]]; then
-   if [[ -d ~/realeScWF-inhost ]]; then
+   if [[ -d ~/NJ ]]; then
       echo "previous workflow execution exists and will be deleted"
-      rm -rf ~/realeScWF-inhost
+      rm -rf ~/NJ
    fi
-  cfy local init --install-plugins -p realeScWF-inhost.yaml --input input.yaml
+  cfy local init --install-plugins -p NJ.yaml --input input.yaml
 else
-   if [[ -d ~/realeScWF-1host ]]; then
+   if [[ -d ~/NJ-1container ]]; then
       echo "previous workflow execution exists and will be deleted"
-      rm -rf ~/realeScWF-1host
+      rm -rf ~/NJ-1container
    fi
-  cfy local init --install-plugins -p realeScWF-1host.yaml -i input.yaml
+  cfy local init --install-plugins -p NJ-1container.yaml -i input.yaml
 fi
 
 cfy local execute -w install
