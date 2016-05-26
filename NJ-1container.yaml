@@ -243,15 +243,17 @@ node_templates:
   ClustalW_Lib:
     type: clustalw_lib
     properties:
-      lib_name: clustalw-2.1-linux-x86_64-libcppstatic
+      lib_name: clustalw2
       lib_URL: http://www.clustal.org/download/current/clustalw-2.1-linux-x86_64-libcppstatic.tar.gz
+      lib_path: clustalw-2.1-linux-x86_64-libcppstatic
+      version: 2.1
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
-          implementation: scripts/clustalw-install.sh
+          implementation: Core-LifecycleScripts/Lib-install.sh
           inputs:
             process:
-              args: [container1, 'http://www.clustal.org/download/current/clustalw-2.1-linux-x86_64-libcppstatic.tar.gz']
+              args: [container1, get_property: [ClustalW_Lib, lib_URL]]
     relationships:
       - type: cloudify.relationships.depends_on
         target: Java
@@ -289,10 +291,10 @@ node_templates:
             process:
              args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/clustalw1.jar']
         start:
-          implementation: scripts/special-deploy.sh
+          implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
             process:
-              args: [NJ-1container, container1,  get_property: [ClustalW_Lib, lib_name]]
+              args: [NJ-1container, container1,  get_property: [ClustalW_Lib, lib_path]]
 
   Wine:
     type: spec_library
@@ -314,14 +316,15 @@ node_templates:
     properties:
       lib_name: megacc.exe
       lib_URL: http://www.megasoftware.net/
-      lib_path: work
+      lib_path: Mega-CC
+      version: 6.0
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
-          implementation: scripts/megaCC-install.sh
+          implementation: Core-LifecycleScripts/Lib-install.sh
           inputs:
             process:
-              args: [container1, 'https://github.com/rawaqasha/work.git']
+              args: [container1, 'https://github.com/rawaqasha/Libs/raw/master/Mega-CC.tar.gz']
     relationships:
       - type: cloudify.relationships.depends_on
         target: Wine
@@ -370,7 +373,7 @@ node_templates:
           implementation: scripts/special-deploy.sh
           inputs:
             process:
-              args: [NJ-1container, container1,  get_property: [Mega-CC, lib_path]]
+              args: [NJ-1container, container1,  'Mega-CC']
 
   ExportFiles1:
     type: exportfiles
