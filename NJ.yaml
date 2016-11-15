@@ -24,12 +24,22 @@ inputs:
   docker-image: 
       description: > 
         Docker image to be used for container building
-      default: 'dtdwd/nj1'
+      default: 'ubuntu:14.04'
 
   create_image:
       description: > 
         an option to create Docker images
       default: 'False'
+
+  local-caching:
+      description: > 
+        an option to locally cache Docker images
+      default: 'True'
+
+  public-cache:
+      description: > 
+        an option to publically cache Docker images
+      default: 'True'
 
 node_types:
 
