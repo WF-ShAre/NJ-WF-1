@@ -1,0 +1,1 @@
+{"relationships": [{"target_name": "FileJoin", "target_id": "FileJoin_d3720", "type": "cloudify.relationships.depends_on"}, {"target_name": "host", "target_id": "host_14c41", "type": "cloudify.relationships.contained_in"}], "name": "container4", "runtime_properties": {}, "node_id": "container4", "version": 0, "host_id": "host_14c41", "id": "container4_cb3c4"}

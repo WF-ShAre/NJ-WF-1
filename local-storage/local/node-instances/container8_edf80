@@ -1,0 +1,1 @@
+{"relationships": [{"target_name": "Mega-NJ", "target_id": "Mega-NJ_6d4f3", "type": "cloudify.relationships.depends_on"}, {"target_name": "host", "target_id": "host_14c41", "type": "cloudify.relationships.contained_in"}], "name": "container8", "runtime_properties": {}, "node_id": "container8", "version": 0, "host_id": "host_14c41", "id": "container8_edf80"}

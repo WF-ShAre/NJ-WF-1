@@ -89,7 +89,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
-          implementation: Core-Lifecyclescripts/java-install2.sh
+          implementation: Core-LifecycleScripts/java-install2.sh
           inputs:
             process:
               args: [container1, NJ, '7']

@@ -1,0 +1,1 @@
+{"relationships": [{"target_name": "importFile2", "target_id": "importFile2_ac6fd", "type": "cloudify.relationships.depends_on"}, {"target_name": "host", "target_id": "host_14c41", "type": "cloudify.relationships.contained_in"}], "name": "container3", "runtime_properties": {}, "node_id": "container3", "version": 0, "host_id": "host_14c41", "id": "container3_2733b"}

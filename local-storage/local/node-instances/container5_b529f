@@ -1,0 +1,1 @@
+{"relationships": [{"target_name": "FilterDupl", "target_id": "FilterDupl_15f79", "type": "cloudify.relationships.depends_on"}, {"target_name": "host", "target_id": "host_14c41", "type": "cloudify.relationships.contained_in"}], "name": "container5", "runtime_properties": {}, "node_id": "container5", "version": 0, "host_id": "host_14c41", "id": "container5_b529f"}
