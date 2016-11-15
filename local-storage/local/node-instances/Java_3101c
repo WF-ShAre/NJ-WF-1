@@ -1,1 +1,0 @@
-{"relationships": [{"target_name": "container1", "target_id": "container1_e2162", "type": "cloudify.relationships.contained_in"}], "name": "Java", "runtime_properties": {}, "node_id": "Java", "version": 0, "host_id": "host_14c41", "id": "Java_3101c"}

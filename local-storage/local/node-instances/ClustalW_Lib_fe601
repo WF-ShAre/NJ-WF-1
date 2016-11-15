@@ -1,1 +1,0 @@
-{"relationships": [{"target_name": "container5", "target_id": "container5_b529f", "type": "cloudify.relationships.contained_in"}, {"target_name": "Java4", "target_id": "Java4_65185", "type": "cloudify.relationships.depends_on"}], "name": "ClustalW_Lib", "runtime_properties": {}, "node_id": "ClustalW_Lib", "version": 0, "host_id": "host_14c41", "id": "ClustalW_Lib_fe601"}

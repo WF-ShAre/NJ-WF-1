@@ -1,1 +1,0 @@
-{"relationships": [{"target_name": "container6", "target_id": "container6_1307e", "type": "cloudify.relationships.contained_in"}], "name": "Wine", "runtime_properties": {}, "node_id": "Wine", "version": 0, "host_id": "host_14c41", "id": "Wine_cc687"}

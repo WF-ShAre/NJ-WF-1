@@ -1,1 +1,0 @@
-{"relationships": [{"target_name": "ClustalW", "target_id": "ClustalW_c0acb", "type": "cloudify.relationships.depends_on"}, {"target_name": "host", "target_id": "host_14c41", "type": "cloudify.relationships.contained_in"}], "name": "container6", "runtime_properties": {}, "node_id": "container6", "version": 0, "host_id": "host_14c41", "id": "container6_1307e"}

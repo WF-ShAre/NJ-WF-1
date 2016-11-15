@@ -1,1 +1,0 @@
-{"relationships": [{"target_name": "container2", "target_id": "container2_08e10", "type": "cloudify.relationships.contained_in"}, {"target_name": "Java1", "target_id": "Java1_2cd8c", "type": "cloudify.relationships.depends_on"}], "name": "importFile2", "runtime_properties": {}, "node_id": "importFile2", "version": 0, "host_id": "host_14c41", "id": "importFile2_ac6fd"}
