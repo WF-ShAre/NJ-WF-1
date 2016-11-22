@@ -74,7 +74,7 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
-          implementation: Core-LifecycleScripts/container.sh
+          implementation: Core-LifecycleScripts/container-WF.sh
           inputs:
             process:
               args: [NJ-1container]
@@ -91,10 +91,10 @@ node_templates:
     interfaces:
       cloudify.interfaces.lifecycle:
         create:
-          implementation: scripts/java-install2.sh
+          implementation: Core-LifecycleScripts/java-install2.sh
           inputs:
             process:
-              args: [container1]
+              args: [container1, NJ-1container, '7']
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -107,13 +107,14 @@ node_templates:
       block_category: File Management
       service_type: block
       Source: file1.txt
+      block_Url: 'https://github.com/WorkflowCenter-Repositories/ImportFile-Task/raw/v1.0/importfile1.jar'
     interfaces:
       cloudify.interfaces.lifecycle:
         create: 
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/importfile1.jar']
+             args: [NJ-1container, container1, get_property: [importFile1, block_Url]]
         configure:
           implementation: scripts/get-input.sh
           inputs:
@@ -138,13 +139,14 @@ node_templates:
       block_category: File Management
       service_type: block
       Source: file2.txt
+      block_Url: 'https://github.com/WorkflowCenter-Repositories/ImportFile-Task/raw/v1.0/importfile1.jar'
     interfaces:
       cloudify.interfaces.lifecycle:
         create: 
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/importfile1.jar']
+             args: [NJ-1container, container1, get_property: [importFile2, block_Url]]
         configure:
           implementation: scripts/get-input.sh
           inputs:
@@ -168,6 +170,7 @@ node_templates:
       block_name: filejoin1.jar
       block_category: File Management
       service_type: block
+      block_Url: 'https://github.com/WorkflowCenter-Repositories/File-Join-Task/raw/v1.0/filejoin1.jar'
       file-1: importFile1/output-1
       file-2: importFile2/output-1
     relationships:
@@ -199,7 +202,7 @@ node_templates:
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/filejoin1.jar']     
+             args: [NJ-1container, container1, get_property: [FileJoin, block_Url]]     
         start:
           implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
@@ -212,7 +215,8 @@ node_templates:
       block_description: I don't know
       block_name: filterduplicates.jar
       block_category: File Management
-      service_type: block      
+      service_type: block 
+      block_Url: https://github.com/WorkflowCenter-Repositories/Filter-Duplicate-Task/raw/v1.0/filterduplicates1.jar     
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -233,7 +237,7 @@ node_templates:
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/filterduplicates1.jar']
+             args: [NJ-1container, container1, get_property: [FilterDupl, block_Url]]
         start:
           implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
@@ -269,6 +273,7 @@ node_templates:
       service_type: block
       Align: true
       Output-Type: CLUSTAL
+      block_Url: 'https://github.com/WorkflowCenter-Repositories/ClustalW-Task/raw/v1.0/clustalw1.jar'
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -289,7 +294,7 @@ node_templates:
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/clustalw1.jar']
+             args: [NJ-1container, container1, get_property: [ClustalW, block_Url]]
         start:
           implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
@@ -337,7 +342,8 @@ node_templates:
       block_description: I don't know
       block_name: mega-nj1.jar
       block_category: File Management
-      service_type: block 
+      service_type: block
+      block_Url: https://github.com/WorkflowCenter-Repositories/Mega-NJ-Task/raw/v1.0/mega-nj1.jar
       test_of_phylogeny: Bootstrap method
       no-ofbootstrapreplications: 1000
       model/method: Kimura 2-parameter model
@@ -368,7 +374,7 @@ node_templates:
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/mega-nj1.jar']
+             args: [NJ-1container, container1, get_property: [Mega-NJ, block_Url]]
         start:
           implementation: scripts/special-deploy.sh
           inputs:
@@ -382,6 +388,7 @@ node_templates:
       block_name: exportfiles1.jar
       block_category: File Management
       service_type: block
+      block_Url: 'https://github.com/WorkflowCenter-Repositories/ExportFiles-Task/raw/v1.0/exportfiles1.jar'
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -402,7 +409,7 @@ node_templates:
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/exportfiles1.jar']
+             args: [NJ-1container, container1, get_property: [ExportFiles1, block_Url]]
         start: 
           implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
@@ -416,6 +423,7 @@ node_templates:
       block_name: exportfiles1.jar
       block_category: File Management
       service_type: block
+      block_Url: 'https://github.com/WorkflowCenter-Repositories/ExportFiles-Task/raw/v1.0/exportfiles1.jar'
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -436,7 +444,7 @@ node_templates:
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/exportfiles1.jar']
+             args: [NJ-1container, container1, get_property: [ExportFiles2, block_Url]]
         start: 
           implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
@@ -450,6 +458,7 @@ node_templates:
       block_name: exportfiles1.jar
       block_category: File Management
       service_type: block
+      block_Url: 'https://github.com/WorkflowCenter-Repositories/ExportFiles-Task/raw/v1.0/exportfiles1.jar'
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -470,7 +479,7 @@ node_templates:
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/exportfiles1.jar']
+             args: [NJ-1container, container1, get_property: [ExportFiles3, block_Url]]
         start: 
           implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
@@ -485,6 +494,7 @@ node_templates:
       block_category: File Management
       FileName: out1.csv
       service_type: block
+      block_Url: 'https://github.com/WorkflowCenter-Repositories/CSV-Export-Task/raw/v1.0/csvexport1.jar'
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -505,7 +515,7 @@ node_templates:
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/csvexport1.jar']
+             args: [NJ-1container, container1, get_property: [CSV_export1, block_Url]]
         start: 
           implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
@@ -520,6 +530,7 @@ node_templates:
       block_category: File Management
       FileName: out2.csv
       service_type: block
+      block_Url: 'https://github.com/WorkflowCenter-Repositories/CSV-Export-Task/raw/v1.0/csvexport1.jar'
     relationships:
       - type: cloudify.relationships.contained_in
         target: container1
@@ -540,7 +551,7 @@ node_templates:
           implementation: Core-LifecycleScripts/task-download-single.sh
           inputs:
             process:
-             args: [NJ-1container, container1, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/csvexport1.jar']
+             args: [NJ-1container, container1, get_property: [CSV_export2, block_Url]]
         start: 
           implementation: Core-LifecycleScripts/task-deploy.sh
           inputs:
@@ -555,7 +566,7 @@ node_templates:
           implementation: Core-LifecycleScripts/image_create.sh
           inputs:
             process:
-             args: [nj-new, container1, { get_input: create_image}]
+             args: [NJ-1container, container1, { get_input: create_image}]
         configure:
           implementation: Core-LifecycleScripts/containers-clean.sh
           inputs:
